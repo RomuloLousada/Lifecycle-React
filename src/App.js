@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import Users from './components/users/Users';
 
-function App() {
+export default function App() {
+  const [users, setUsers] = useState([]);
+  const [showUsers, setShowUsers] = useState(false);
+
+  useEffect(async () => {
+    const res = await fetch("https://randomuser.me/api/?seed=rush&nat=br&results=10");
+    const json = await res.json();
+
+    setUsers(json.results);
+  }, []);
+
+  const toggleVisibility = (event) => {
+    setShowUsers(event.target.checked)
+  };
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="margin">
+      <div className="switch">
+        <label>
+          Show Users
+          <input type="checkbox" onChange={toggleVisibility}/>
+          <span className="lever"></span>
+        </label>
+      </div>
+      <hr />
+      {showUsers && <Users users={users}/>}
     </div>
   );
 }
-
-export default App;

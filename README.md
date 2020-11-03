@@ -1,3 +1,7 @@
+# Lifecycle - React
+
+Projeto exibindo os diferentes ciclos de vida dos componentes em React.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
